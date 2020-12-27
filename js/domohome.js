@@ -1,16 +1,16 @@
 const climControl = {
     on: () => {
-        post("/home/heat", { enable: true });
+        post("/api/v1/home/heat", { enable: true });
     },
     off: () => {
-        post("/home/heat", { enable: false });
+        post("/api/v1/home/heat", { enable: false });
     },
     setJob: (enable, hours) => {
-        post('/home/job', { enable, hours });
+        post('/api/v1/home/job', { enable, hours });
 
     },
     getJob: () => {
-        return fetch('/home/job');
+        return fetch('/api/v1/home/job');
     }
 }
 
