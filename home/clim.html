@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Ratchet template page</title>
+
+  <!-- Sets initial viewport load and disables zooming  -->
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+  <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Include the compiled Ratchet CSS -->
+  <link href="/css/ratchet.css" rel="stylesheet">
+
+  <!-- Optionally, include either the iOS or Android theme -->
+  <link href="/css/ratchet-theme-ios.css" rel="stylesheet">
+
+  <!-- Include the compiled Ratchet JS -->
+  <script src="/js/ratchet.js"></script>
+  <script src="/js/domohome.js"></script>
+
+</head>
+
+<body>
+  <input style="visibility: hidden" type="checkbox" value="" id="enable-job">
+
+  <!-- Make sure all your bars are the first things in your <body> -->
+  <header class="bar bar-nav">
+    <a class="icon icon-left-nav pull-left" href="/index.html" data-transition="slide-out"></a>
+    <h1 class="title">Controle de la climatisation</h1>
+  </header>
+
+  <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+  <div class="content">
+    <div class="content-padded">
+      <button onclick="climControl.on()"class="btn btn-block">ON 24 Sleep</button>
+      <button onclick="climControl.off()" class="btn btn-block">OFF</button>
+
+      <h5 class="content-padded">Programation</h5>
+
+      <ul class="table-view">
+        <li class="table-view-cell media">
+          <span class="media-object pull-left icon icon-home"></span>
+          <div class="media-body">
+            activé
+          </div>
+          <div id="enable" class="toggle" data-matcher="enable-job">
+            <div class="toggle-handle"></div>
+          </div>
+        </li>
+        <li class="table-view-cell media">
+          <input id="hour" type="number" placeholder="heure de declenchement">
+        </li>
+      </ul>
+      <div class="content-padded">
+        <button onclick="form_update_job()" class="btn btn-positive btn-block">Save settings</button>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+<script>
+
+  let enable;
+
+  document.getElementById("enable").addEventListener('toggle', (event) => {
+    enable = event.detail.isActive;
+  });
+
+  function form_update_job() {
+    const hour = document.getElementById("hour").value;
+    climControl.setJob(enable, hour);
+  }
+
+  climControl.getJob()
+    .then((job) => {
+      if (job.enable) {
+        document.getElementById('enable').isActive = job.enable;
+      }
+      if (job.hour) {
+        document.getElementById('hour').value = job.hour; 
+      }
+    });
+
+</script>
+
+</html>

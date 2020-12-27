@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Ratchet template page</title>
+
+  <!-- Sets initial viewport load and disables zooming  -->
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+  <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Include the compiled Ratchet CSS -->
+  <link href="/css/ratchet.css" rel="stylesheet">
+
+  <!-- Optionally, include either the iOS or Android theme -->
+  <link href="/css/ratchet-theme-ios.css" rel="stylesheet">
+
+  <!-- Include the compiled Ratchet JS -->
+  <script src="/js/ratchet.js"></script>
+  <script src="/js/domohome.js"></script>
+</head>
+
+<body>
+
+  <!-- Make sure all your bars are the first things in your <body> -->
+  <header class="bar bar-nav">
+    <a class="icon icon-gear pull-right" href="#settingsModal"></a>
+    <h1 class="title">Domotique</h1>
+  </header>
+
+  <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+  <div class="content">
+    <div class="content-padded">
+      <h3>interface de commande</h3>
+    </div>
+    <div class="card">
+      <ul class="table-view">
+        <li class="table-view-cell">
+          <a class="push-right" href="home/clim.html" data-transition="slide-in">
+            <strong>Climatisation</strong>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="modal">
+    <header class="bar bar-nav">
+      <a class="icon icon-close pull-right" href="#settingsModal"></a>
+      <h1 class="title">Parametre utilisateur</h1>
+    </header>
+
+    <div class="content">
+      <form class="input-group">
+        <input id="pwd" type="password" placeholder="mot de passe">
+      </form>
+
+      <div class="content-padded">
+        <button onclick="set_password_from_form()" class="btn btn-positive btn-block">Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+<script>
+
+function set_password_from_form() {
+  const password = document.getElementById("pwd").value;
+  PasswordManager.set(password);
+}
+
+document.getElementById("pwd").value = PasswordManager.get();
+
+</script>
+</body>
+
+</html>
