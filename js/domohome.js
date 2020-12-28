@@ -46,3 +46,40 @@ const PasswordManager = {
         return localStorage.getItem("password");
     }
 }
+
+
+function onClimControlLoad() {
+    console.log("clim control load");
+    let enable;
+
+    document
+        .getElementById("enable")
+        .addEventListener('toggle', (event) => {
+            console.log("test");
+            enable = event.detail.isActive;
+        });
+
+    function form_update_job() {
+        const hour = document.getElementById("hour").value;
+        climControl.setJob(enable, hour);
+    }
+
+    climControl.getJob()
+        .then((job) => {
+            if (job.enable) {
+                document.getElementById('enable').isActive = job.enable;
+            }
+            if (job.hour) {
+                document.getElementById('hour').value = job.hour;
+            }
+        });
+
+}
+
+
+window.addEventListener('push', (event) => {
+  if(event.currentTarget.location.pathname === '/home/clim.html') {
+      onClimControlLoad();
+  }
+});
+

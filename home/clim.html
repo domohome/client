@@ -24,7 +24,7 @@
 
 </head>
 
-<body>
+<body id="onClimControlLoad">
   <input style="visibility: hidden" type="checkbox" value="" id="enable-job">
 
   <!-- Make sure all your bars are the first things in your <body> -->
@@ -63,29 +63,4 @@
   </div>
 
 </body>
-<script>
-
-  let enable;
-
-  document.getElementById("enable").addEventListener('toggle', (event) => {
-    enable = event.detail.isActive;
-  });
-
-  function form_update_job() {
-    const hour = document.getElementById("hour").value;
-    climControl.setJob(enable, hour);
-  }
-
-  climControl.getJob()
-    .then((job) => {
-      if (job.enable) {
-        document.getElementById('enable').isActive = job.enable;
-      }
-      if (job.hour) {
-        document.getElementById('hour').value = job.hour; 
-      }
-    });
-
-</script>
-
 </html>
