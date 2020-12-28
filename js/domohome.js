@@ -17,13 +17,15 @@ const climControl = {
 
 
 const API = {
+    setAuthencicationHeader: (headers) => {
+        headers.append("authentication", PasswordManager.get());
+    },
     post: (uri, data) => {
-        const password = document.getElementById("password");
-        data["password"] = password;
         const d = JSON.stringify(data);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("Content-Length", d.length.toString());
+        API.setAuthencicationHeader(myHeaders);
 
         return fetch(uri, {
             method: "POST",
@@ -32,7 +34,12 @@ const API = {
         });
     },
     get: (uri) => {
-        return fetch(uri)
+        var myHeaders = new Headers();
+        API.setAuthencicationHeader(myHeaders);
+        return fetch(uri, {
+            method: "GET",
+            headers: myHeaders
+        })
         .then(response => response.json());
     }
 }
