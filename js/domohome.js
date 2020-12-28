@@ -83,7 +83,7 @@ const ClimPageControl = {
     enable: undefined,
     validateJobForm: () => {
         const hour = document.getElementById("hour").value;
-        climControl.setJob(enable, hour);
+        climControl.setJob(this.enable, hour);
     }
 }
 
