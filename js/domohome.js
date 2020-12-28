@@ -51,11 +51,15 @@ const PasswordManager = {
 
 function onClimControlLoad() {
     console.log("clim control load");
-
+    
+    function toggleActive() {
+     document.getElementById("enable").setAttribute("class", "toggle active");
+    }
+    
     document
         .getElementById("enable")
         .addEventListener('toggle', (event) => {
-            console.log("test");
+            
             ClimPageControl.enable = event.detail.isActive;
         });
 
@@ -64,7 +68,8 @@ function onClimControlLoad() {
             console.log(job);
             if (job.enable) {
                 console.log(job.enable);
-                document.getElementById('enable').isActive = job.enable;
+                ClimPageControl.enable = true;
+                toggleActive();
             }
             if (job.hour) {
                 console.log(job.hour);
