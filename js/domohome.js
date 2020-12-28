@@ -80,7 +80,7 @@ function onClimControlLoad() {
 }
 
 const ClimPageControl = {
-    enable: false,
+    enable: undefined,
     validateJobForm: () => {
         const hour = document.getElementById("hour").value;
         climControl.setJob(ClimPageControl.enable, hour);
