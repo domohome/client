@@ -1,16 +1,16 @@
 const climControl = {
     on: () => {
-        post("/api/v1/home/heat", { enable: true });
+        API.post("/api/v1/home/heat", { enable: true });
     },
     off: () => {
-        post("/api/v1/home/heat", { enable: false });
+        API.post("/api/v1/home/heat", { enable: false });
     },
     setJob: (enable, hours) => {
-        post('/api/v1/home/job', { enable, hours });
+        API.post('/api/v1/home/job', { enable, hours });
 
     },
     getJob: () => {
-        return fetch('/api/v1/home/job');
+        return API.get('/api/v1/home/job');
     }
 }
 
@@ -25,11 +25,14 @@ const API = {
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("Content-Length", d.length.toString());
 
-        fetch(url, {
+        return fetch(uri, {
             method: "POST",
             body: d,
             headers: myHeaders,
         });
+    },
+    get: (uri) => {
+        return fetch(uri);
     }
 }
 
