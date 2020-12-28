@@ -50,19 +50,13 @@ const PasswordManager = {
 
 function onClimControlLoad() {
     console.log("clim control load");
-    let enable;
 
     document
         .getElementById("enable")
         .addEventListener('toggle', (event) => {
             console.log("test");
-            enable = event.detail.isActive;
+            ClimPageControl.enable = event.detail.isActive;
         });
-
-    function form_update_job() {
-        const hour = document.getElementById("hour").value;
-        climControl.setJob(enable, hour);
-    }
 
     climControl.getJob()
         .then((job) => {
@@ -76,6 +70,13 @@ function onClimControlLoad() {
 
 }
 
+const ClimPageControl = {
+    enable: undefined,
+    validateJobForm: () => {
+        const hour = document.getElementById("hour").value;
+        climControl.setJob(enable, hour);
+    }
+}
 
 window.addEventListener('push', (event) => {
   if(event.currentTarget.location.pathname === '/home/clim.html') {
