@@ -32,7 +32,8 @@ const API = {
         });
     },
     get: (uri) => {
-        return fetch(uri);
+        return fetch(uri)
+        .then(response => response.json());
     }
 }
 
