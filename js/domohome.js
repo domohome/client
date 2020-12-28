@@ -60,10 +60,13 @@ function onClimControlLoad() {
 
     climControl.getJob()
         .then((job) => {
+            console.log(job);
             if (job.enable) {
+                console.log(job.enable);
                 document.getElementById('enable').isActive = job.enable;
             }
             if (job.hour) {
+                console.log(job.hour);
                 document.getElementById('hour').value = job.hour;
             }
         });
